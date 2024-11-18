@@ -1,4 +1,5 @@
 MAX_SIZE = 9
+START_POINTS = 10
 
 items = {
     'r': {'size': 3, 'live_points':25},
@@ -24,7 +25,10 @@ def gen_tab(items, max_size=MAX_SIZE):
         for limit_size in range(1, max_size + 1):
             col = limit_size - 1
             if i == 0:
-                table[i][col] = 0 if size > limit_size else live_points
+                if size > limit_size:
+                    table[i][col] = 0  
+                else:
+                    table[i][col] = live_points
             else:
                 pre_live_points = table[i-1][col]
                 if size > limit_size:
@@ -39,6 +43,7 @@ def gen_tab(items, max_size=MAX_SIZE):
     return table
 
 if __name__ == '__main__':
+    marks = ['r', 'p', 'a', 'm', 'i', 'k', 'x', 't', 'f', 'd', 's', 'c']
     table = gen_tab(items)
     for i in range(len(table)):
-        print(i + 1, table[i])
+        print(marks[i], table[i])
