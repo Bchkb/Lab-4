@@ -27,7 +27,7 @@ def live_points_sign_check(items, points):
         all_live_points += value['live_points']
     points += START_POINTS
     if all_live_points - points < points:
-        return True
+        return points - (all_live_points - points)
     else:
         return False
 
@@ -106,9 +106,11 @@ def item_complect(table, items):
                 avaibale_size = avaibale_size - item_size[k]
 
     
-
-    if live_points_sign_check(items, table[len(table) - 1][MAX_SIZE - 1]):
+    final_points = live_points_sign_check(items, table[len(table) - 1][MAX_SIZE - 1])
+    
+    if final_points > 0:
         gen_inventory(marks, item_size, complect)
+        print(f'Итоговый счёт выживания: {final_points}')
     else:
         return 'Error'
 
